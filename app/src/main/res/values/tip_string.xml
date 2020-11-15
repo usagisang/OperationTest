@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="answer_correct">回答正确</string>
+    <string name="answer_wrong">回答有点偏差呢</string>
+    <string name="show_answer_tip">运算结果如下</string>
+    <string name="ask_question">输入以下算式的运算结果</string>
+</resources>

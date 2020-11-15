@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">运算测验</string>
+    <string name="settings">设置</string>
+    <string name="show_answer">显示答案</string>
+    <string name="check_answer">检查答案</string>
+    <string name="turn_next">下一题</string>
+</resources>
