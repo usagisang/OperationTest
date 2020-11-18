@@ -1,9 +1,13 @@
 package top.gochiusa.operationtest.util
 
 object Constant {
-    const val ADD_AND_REDUCE_MODE = "加减法"
-    const val MULTIPLICATION_AND_DIVISION_MODE = "乘除法"
-    const val MIXED_OPERATION_MODE = "混合运算"
+    const val ADD_MODE: Int = 0b0001
+    const val MINUS_MODE = 0b0010
+    const val MULTIPLICATION_MODE = 0b0100
+    const val DIVISION_MODE = 0b1000
+    const val MIXED_OPERATION_MODE = 0b1111
+
+    const val DEFAULT_OPERATION_MODE = MIXED_OPERATION_MODE
 
     const val SETTING_FILE_NAME = "settings"
     const val MAX_NUMBER_SETTING_KEY = "max_number"
@@ -14,7 +18,6 @@ object Constant {
     const val DEFAULT_MAX_NUMBER = 99
     const val DEFAULT_MIN_NUMBER = -99
     const val DEFAULT_NUMBER_COUNT = 2
-    const val DEFAULT_OPERATION_MODE = ADD_AND_REDUCE_MODE
 
     const val EQUAL_SIGN = "="
 

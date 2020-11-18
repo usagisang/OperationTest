@@ -2,7 +2,6 @@ package top.gochiusa.operationtest.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -13,9 +12,7 @@ import top.gochiusa.operationtest.entity.Operator
 import top.gochiusa.operationtest.entity.UserSetting
 import top.gochiusa.operationtest.main.setting.SettingActivity
 import top.gochiusa.operationtest.util.Constant
-import top.gochiusa.operationtest.util.calculateExpression
-import top.gochiusa.operationtest.util.generateExpression
-import top.gochiusa.operationtest.util.roundingDouble
+import top.gochiusa.operationtest.util.FractionUtils
 import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -32,12 +29,7 @@ class MainActivity : AppCompatActivity() {
      */
     private lateinit var expressionList: List<Any>
 
-    /**
-     * 当前显示的表达式字符串
-     */
-    private var expressionString = ""
-
-    private val regex = Regex("^[-+]?([0-9]\\d*)$|^[-+]?[0-9]+\\.?[0-9]+$")
+    private val regex = Regex("^[-+]?([0-9]\\d*)$|^[-+]?[0-9]+[./]?[0-9]+$")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,30 +50,16 @@ class MainActivity : AppCompatActivity() {
             it.isEnabled = false
             checkAnswerButton.isEnabled = false
             tipTextView.setText(R.string.show_answer_tip)
-            val result = calculateExpression(expressionList)
-            // TODO 算数结果计算优化
+            val resultFraction = FractionUtils.calculateWithFraction(expressionList)
             // 确定需要显示的算数结果
-            val text = if (UserSetting.operationMode == Constant.ADD_AND_REDUCE_MODE) {
-                result.toInt().toString()
-            } else {
-                roundingDouble(result.toDouble(), 3).toString()
-            }
-            expressionTextView.text = "${expressionTextView.text}$text"
+            expressionTextView.text = "${expressionTextView.text}$resultFraction"
         }
 
         checkAnswerButton.setOnClickListener {
-            val result = calculateExpression(expressionList)
+            val result = FractionUtils.calculateWithFraction(expressionList)
             var correct = false
-            // TODO 计算结果正确与否判断优化
             if (editText.text.matches(regex)) {
-                correct = if (UserSetting.operationMode == Constant.ADD_AND_REDUCE_MODE) {
-                    Log.d("this", result.toInt().toString())
-                    Log.d("this", editText.text.toString())
-                    (result.toInt().toString() == editText.text.toString())
-                } else {
-                    (roundingDouble(result.toDouble(), 3) ==
-                            roundingDouble(editText.text.toString().toDouble(), 3))
-                }
+                correct = (result.toString() == editText.text.toString())
             }
             if (correct) {
                 tipTextView.setText(R.string.answer_correct)
@@ -101,14 +79,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun refreshExpression() {
         // 生成算式列表
-        expressionList = generateExpression()
+        expressionList = FractionUtils.generateExpression()
         // 字符拼接
         val builder = StringBuilder()
         for (any in expressionList) {
-            if (any is Double) {
-                builder.append(any.toInt())
-            } else if (any is Operator) {
-                builder.append(any.toString())
+            when (any) {
+                is Double -> {
+                    builder.append(any.toDouble())
+                }
+                is Operator -> {
+                    builder.append(any.toString())
+                }
+                is Int -> {
+                    builder.append(any.toInt())
+                }
             }
         }
         builder.append(Constant.EQUAL_SIGN)

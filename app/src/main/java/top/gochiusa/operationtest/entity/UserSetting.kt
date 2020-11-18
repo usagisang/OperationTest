@@ -28,10 +28,10 @@ object UserSetting {
             field = value
             preferences.edit().putInt(Constant.NUMBER_COUNT_SETTING_KEY, value).apply()
         }
-    var operationMode: String = preferences.getString(Constant.OPERATION_MODE_SETTING_KEY,
-            Constant.DEFAULT_OPERATION_MODE).toString()
+    var operationMode: Int = preferences.getInt(Constant.OPERATION_MODE_SETTING_KEY,
+            Constant.DEFAULT_OPERATION_MODE)
         set(value) {
             field = value
-            preferences.edit().putString(Constant.OPERATION_MODE_SETTING_KEY, value).apply()
+            preferences.edit().putInt(Constant.OPERATION_MODE_SETTING_KEY, value).apply()
         }
 }
