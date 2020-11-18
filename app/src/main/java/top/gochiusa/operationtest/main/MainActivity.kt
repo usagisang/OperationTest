@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import top.gochiusa.operationtest.R
 import top.gochiusa.operationtest.entity.Operator
-import top.gochiusa.operationtest.entity.UserSetting
 import top.gochiusa.operationtest.main.setting.SettingActivity
 import top.gochiusa.operationtest.util.Constant
 import top.gochiusa.operationtest.util.FractionUtils
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
      */
     private lateinit var expressionList: List<Any>
 
-    private val regex = Regex("^[-+]?([0-9]\\d*)$|^[-+]?[0-9]+[./]?[0-9]+$")
+    private val regex = Regex("^[-+]?([0-9]\\d*)$|^[-+]?[0-9]+[-./]?[0-9]+$")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

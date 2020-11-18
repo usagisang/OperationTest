@@ -5,6 +5,8 @@ import kotlin.math.min
 
 class Fraction(var numerator: Int, var denominator: Int) {
 
+    constructor(numerator: Int): this(numerator, 1)
+
     fun add(int: Int) {
         numerator += (int * denominator)
     }
@@ -38,7 +40,7 @@ class Fraction(var numerator: Int, var denominator: Int) {
         var i = max(numerator, denominator)
         var j = min(numerator, denominator)
         var cache: Int
-        while (j > 0 && i > 0) {
+        while (j != 0 && i != 0) {
             // 缓存当前除数
             cache = j
             // 余数作为下一个除数

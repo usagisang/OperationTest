@@ -67,7 +67,7 @@ object FractionUtils {
         var obj: Any?
         while (expressionQueue.poll().also { obj = it } != null) {
             if (obj is Int) {
-                calculateStack.push((obj as Int).toFraction())
+                calculateStack.push(Fraction(obj as Int))
             } else if (obj is Operator) {
                 val numberOne = calculateStack.pop()
                 val numberTwo = calculateStack.pop()
@@ -86,7 +86,7 @@ object FractionUtils {
 
     infix fun Fraction.minus(fraction: Fraction): Fraction {
         this.numerator = (this.numerator * fraction.denominator) -
-                (fraction.numerator + this.denominator)
+                (fraction.numerator * this.denominator)
         this.denominator *= fraction.denominator
         return this
     }

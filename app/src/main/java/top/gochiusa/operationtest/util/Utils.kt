@@ -1,6 +1,5 @@
 package top.gochiusa.operationtest.util
 
-import top.gochiusa.operationtest.entity.Fraction
 import top.gochiusa.operationtest.entity.Operator
 import java.util.*
 
@@ -9,10 +8,6 @@ import java.util.*
  */
 fun roundingDouble(double: Double, decimal: Int) =
         String.format("%.${decimal}f", double).toDouble()
-
-fun Int.toFraction(): Fraction {
-    return Fraction(this, 1)
-}
 
 /**
  * 生成指定区间内的随机整数，不包含0
