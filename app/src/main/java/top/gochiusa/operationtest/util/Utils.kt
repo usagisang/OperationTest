@@ -44,6 +44,12 @@ fun generateRandomOperator(operationMode: Int): Operator {
 }
 
 /**
+ * 将Int的最低位（最右边）转换为Boolean值，最低位为1->true，0->false
+ */
+fun Int.shortBitToBoolean() = (this and 0b01) == 0b01
+
+
+/**
  * 将含有中缀表达式的集合转换为含有逆波兰表达式的集合
  */
 fun generateReversePolishNotation(list: List<Any>): Queue<Any> {
@@ -98,5 +104,6 @@ private fun getRandomInt(minNumber: Int, maxNumber: Int): Int {
         (minNumber..maxNumber).random()
     }
 }
+
 
 

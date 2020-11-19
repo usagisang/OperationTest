@@ -52,11 +52,23 @@ class Fraction(var numerator: Int, var denominator: Int) {
         denominator /= i
     }
 
+    /**
+     * 规范化分数可能带有的负号，如90/-74，要求负号始终在前面，比如-90/74
+     */
+    fun standard() {
+        if (denominator < 0) {
+            denominator = -denominator
+            numerator = -numerator
+        }
+    }
+
     override fun toString(): String {
         return if (isInt()) {
+            standard()
             "${toInt()}"
-        }else {
+        } else {
             reduce()
+            standard()
             "$numerator/$denominator"
         }
     }

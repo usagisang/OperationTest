@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_operation_mode">调整运算符</string>
+    <string name="setting_minimum_number">随机生成最小值</string>
+    <string name="setting_maximum_number">随机生成最大值</string>
+    <string name="setting_number_count">参与运算的数字个数</string>
+    <string name="setting_check_update">检查更新</string>
+    <string name="setting_default_title">关于</string>
+</resources>

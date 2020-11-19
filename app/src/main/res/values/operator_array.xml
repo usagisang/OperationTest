@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="operator_array">
+        <item>加</item>
+        <item>减</item>
+        <item>乘</item>
+        <item>除</item>
+    </string-array>
+</resources>

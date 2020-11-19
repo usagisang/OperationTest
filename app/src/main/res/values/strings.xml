@@ -4,4 +4,6 @@
     <string name="show_answer">显示答案</string>
     <string name="check_answer">检查答案</string>
     <string name="turn_next">下一题</string>
+    <string name="positive_button">确认</string>
+    <string name="negative_button">取消</string>
 </resources>
