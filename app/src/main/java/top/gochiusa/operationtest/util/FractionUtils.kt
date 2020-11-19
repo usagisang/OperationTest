@@ -13,8 +13,13 @@ object FractionUtils {
      */
     fun generateExpression(): List<Any> {
         val count = UserSetting.numberCount
+        // 缓存运算表达式
         val expression = mutableListOf<Any>()
         var number: Int
+        // 缓存随机生成的运算符
+        var operator: Operator
+        // 运算符出现次数的统计集合
+        val operatorList: MutableList<Int> = mutableListOf(0, 0, 0, 0)
         for (i in 0 until count) {
             number = randomInt(UserSetting.minNumber, UserSetting.maxNumber)
             if (number > 0) {
@@ -25,7 +30,11 @@ object FractionUtils {
                 expression.add(Operator.Right)
             }
             if (i < count - 1) {
-                expression.add(generateRandomOperator(UserSetting.operationMode))
+                // 如果某一个运算符被随机出来的次数过多，继续尝试生成其他运算符
+                do {
+                    operator = generateRandomOperator(UserSetting.operationMode)
+                } while (operatorList[Operator.antiMatch(operator)]++ > 1)
+                expression.add(operator)
             }
         }
         return expression

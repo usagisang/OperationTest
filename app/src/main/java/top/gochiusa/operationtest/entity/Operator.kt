@@ -19,5 +19,14 @@ enum class Operator(val value: String, val priority: Int) {
                 else -> Plus
             }
         }
+        fun antiMatch(value: Operator): Int {
+            return when(value) {
+                Plus -> 0
+                Minus -> 1
+                Multiply -> 2
+                Divide -> 3
+                else -> 0
+            }
+        }
     }
 }
